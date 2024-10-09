@@ -1,0 +1,33 @@
+install.packages("pacman")
+install.packages("readr")
+install.packages("ggplot2")
+library("pacman",
+        "readr")
+read.csv(file="https://raw.githubusercontent.com/ManuelLaraMVZ/titulacion_amino_acidos/main/datos_titulacion%20(2).csv")
+datos <- read.csv(file="https://raw.githubusercontent.com/ManuelLaraMVZ/titulacion_amino_acidos/main/datos_titulacion%20(2).csv")
+head(datos)
+View(datos)
+############## 
+#GRAFICA
+library("ggplot2")
+grafica <- ggplot(data=datos,mapping=aes(x=Volumen,y=pH))+
+  geom_line()
+grafica
+
+grafica2 <- grafica+
+  labs(tittle="curva de titulación",
+       subtitle ="creador:Karla",
+       caption ="Metabolomica",
+       x="volumen de acido (uL)", 
+       y="valor de pH")+
+  theme_classic()
+
+Grafica2
+grafica3 <- grafica2+
+    scale_y_continuous(breaks=seq(0,14,by=1))+
+  theme(axis.line=element_line(size=1.5))
+grafica3
+ggsave(plot=grafica3,filename= "graficas titulacion.jpeg",
+       dpi=300,height = 4, width = 6)#para guardar la grafica
+
+
